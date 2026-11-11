@@ -25,9 +25,20 @@ export function startObservers(root: HTMLElement): () => void {
     }
   }
 
+  const syncMeter = () => {
+    // stamp the token-meter container when it exists (official chat UI renders it
+    // inside the composer on active conversations); keyed to our namespace so CSS
+    // can restyle the official meter without hash selectors
+    const composerEl = document.querySelector('[class*="composer"], [class*="inputRow"]')
+    if (!composerEl) return
+    const meter = composerEl.querySelector('[class*="meter"], [class*="Meter"], [class*="token"]')
+    if (meter) meter.setAttribute('data-reskin-swiss-meter', 'ring')
+  }
+
   const syncAll = () => {
     syncTheme()
     syncSidebar()
+    syncMeter()
   }
 
   syncAll()
