@@ -12,7 +12,7 @@
 
 *One red. Everything else is ink on paper.*
 
-[Why](#why) · [Install](#-install) · [Settings](#%EF%B8%8F-settings) · [Screenshots](#-screenshots) · [Related](#-related)
+[Why](#why) · [Install](#-install) · [Settings](#%EF%B8%8F-settings) · [Screenshots](#-screenshots) · [Contributors](#-contributors) · [Related](#-related)
 
 </div>
 
@@ -130,11 +130,31 @@ exactly.
 
 </details>
 
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) — design discipline first, motion
+budget, no new client dependencies, and a stock-profile reproduction check.
+
 ## 🔗 Related
 
 - [**dsh-skin-swiss-typographic**](https://github.com/0xmrxp/dsh-skin-swiss-typographic) —
   the same design packaged as a skin-center v2 skin (asset directory, for users
   of the community skin center with theme picker UI)
+
+## 👥 Contributors
+
+<table>
+<tr>
+<td align="center">
+<a href="https://github.com/0xmrxp"><img src="https://avatars.githubusercontent.com/u/285124862?v=4" width="64" alt="0xmrxp"/><br/><sub><b>0xmrxp</b></sub><br/><sub>design & code</sub></a>
+</td>
+<td align="center">
+<a href="https://github.com/0xmrxp/dsh-reskin-swiss/issues"><img src="https://img.shields.io/badge/YOUR%20FACE-HERE?style=flat-square&labelColor=24292f&color=E30613" width="64" alt="you?"/><br/><sub><b>you?</b></sub><br/><sub>see CONTRIBUTING.md</sub></a>
+</td>
+</tr>
+</table>
+
+<!-- CONTRIBUTORS:README (auto-maintained; add a cell per contributor) -->
 
 <div align="center">
 
