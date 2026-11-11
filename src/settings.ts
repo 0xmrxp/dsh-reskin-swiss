@@ -183,6 +183,17 @@ export function applySettings(ctx: any): () => void {
         ...body)
     }
 
+    // Tab panel component for the Plugins page 'Swiss Typographic' tab
+    function TabCard(): any {
+      return react.createElement('div', { style: { maxWidth: 860, margin: '0 auto', padding: '24px 16px' } },
+        react.createElement('h2', { style: { fontSize: 24, fontWeight: 700, margin: '0 0 4px', color: 'var(--dsw-alias-label-primary, #111)' } },
+          'Swiss Typographic'),
+        react.createElement('p', { style: { fontSize: 13, color: 'var(--dsw-alias-label-secondary, #555)', margin: '0 0 16px' } },
+          'One red. Everything else is ink on paper.'),
+        react.createElement(Card, null),
+      )
+    }
+
     ctx.slots.inject('plugins.bundle.config', () => {
       ctx.slots.register(
         { name: 'plugins.bundle.config', key: 'dsh-reskin-swiss', order: 200 },

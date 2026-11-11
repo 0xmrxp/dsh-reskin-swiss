@@ -61,6 +61,10 @@ the design tokens the built-in frontend already publishes.
 
 <img src="docs/screenshots/dark.png" alt="Dark mode" width="100%" />
 
+**Context meter & session stats — the precision gauge**
+
+<img src="docs/screenshots/context-meter.png" alt="Context meter popover" width="100%" />
+
 </div>
 
 ## 📦 Install
@@ -103,7 +107,7 @@ Values persist across restarts and hot-reload. A settings card with the same
 toggles also renders on the plugin's page under **Plugins** in the Web UI:
 
 <div align="center">
-<img src="docs/screenshots/settings.png" alt="Settings card on the Plugins page" width="80%" />
+<img src="docs/screenshots/settings.png" alt="Settings card — Motion tab" width="80%" />
 </div>
 
 ## 🧩 How it works
