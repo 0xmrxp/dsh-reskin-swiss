@@ -1,0 +1,37 @@
+{
+  "name": "dsh-reskin-swiss",
+  "version": "1.0.0",
+  "description": "Swiss Typographic reskin for the DeepSeek Harness web GUI — official client-module only, no community stack",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.2-rc.1"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [],
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.2-rc.1"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js"
+  }
+}
