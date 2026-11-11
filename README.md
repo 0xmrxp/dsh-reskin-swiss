@@ -52,6 +52,24 @@ MutationObservers mirror official shell state onto the plugin's own
 rewriting. Plus one orchestrated moment (160 ms message fade, honors
 `prefers-reduced-motion`) and an unmistakable `focus-visible` red ring.
 
+**Layer 3 — configuration.** The host face declares a `Config` schema (two
+volatile booleans: `messageFade`, `focusRing`) so the settings live in the
+profile's config, persist across restarts, and hot-reload via Cordis. The host
+persists the current values and serves them at `GET /dsh-reskin-swiss/config`;
+the browser half polls that endpoint (visible tabs only, 4 s interval) and
+flips the `data-reskin-swiss-fade` / `data-reskin-swiss-focus` attributes —
+the stylesheet keys off them, so changes apply without a reload. Settings can
+be changed through the profile patch row's `config:` block:
+
+```yaml
+- insert:
+    - id: ui-reskin-swiss
+      name: 'dsh-reskin-swiss'
+      config:
+        messageFade: true   # message enter animation
+        focusRing: true     # red keyboard focus ring
+```
+
 ## How it works
 
 ```

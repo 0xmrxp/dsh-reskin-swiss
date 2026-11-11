@@ -1,4 +1,9 @@
-# Swiss Typographic reskin: inserts its dsh.client row into the web roster.
+# Swiss Typographic reskin bundle patch: inserts its dsh.client row into the web roster.
+# The config block gives the row a config ledger entry (the Plugins page's row-config
+# seat renders for rows that declare one); defaults match the schema in lib/index.js.
 - insert:
     - id: ui-reskin-swiss
       name: 'dsh-reskin-swiss'
+      config:
+        messageFade: true
+        focusRing: true
