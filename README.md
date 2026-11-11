@@ -1,27 +1,68 @@
-# dsh-reskin-swiss
+<div align="center">
 
-[![license](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
+<img src="assets/preview-poster.png" alt="Swiss Typographic — one red. Everything else is ink on paper." width="100%" />
 
-**Swiss Typographic reskin for the built-in DeepSeek Harness Web GUI — official client-module mechanism only.**
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+![DeepSeek Harness](https://img.shields.io/badge/DeepSeek%20Harness-%E2%89%A50.2.2--rc.1-blue)
+![Mechanism](https://img.shields.io/badge/mechanism-official%20client%20module-blueviolet)
+![Runtime](https://img.shields.io/badge/runtime-CSS%20only-informational)
+![Themes](https://img.shields.io/badge/themes-light%20%7C%20dark-success)
 
-No community plugin stack required. This package uses the official `dsh.client`
-extension point (Client Modules) of [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
-to inject one stylesheet that remaps the built-in frontend's official
-`--dsw-alias-*` semantic tokens.
+**Swiss Typographic — a reskin for the built-in DeepSeek Harness Web GUI.**
 
-## What it changes
+*One red. Everything else is ink on paper.*
 
-One red (#E30613 light / #FF2A1F dark). Everything else is ink on paper:
+[Why](#why) · [Install](#-install) · [Settings](#%EF%B8%8F-settings) · [Screenshots](#-screenshots) · [Related](#-related)
 
-- Pure white canvas (light) / print-shop black #111111 (dark)
-- Strict gray ladder, hairline borders
-- Radius ladder pressed flat: 0–2px
-- Helvetica Neue → Inter → CJK fallback chain
-- Send button and brand accents routed to Swiss red (including the
-  `--dsw-alias-button-info-fill` path that flows through
-  `--dsw-static-deepseek-500`)
+</div>
 
-## Install into a profile
+---
+
+## Why
+
+The built-in Web GUI is functional but visually stock. This reskin rebuilds it
+in the language of **International Typographic Style** — the school of
+Müller-Brockmann: pure white paper (or print-shop black), a strict gray ladder,
+hairline rules instead of shadows, flat corners, neutral Helvetica-first type,
+and a single spent-carefully accent: **Swiss red**.
+
+No third-party UI framework. No community plugin stack. The reskin rides the
+official client-module extension point of DeepSeek Harness and speaks only to
+the design tokens the built-in frontend already publishes.
+
+## ✨ What you get
+
+| | Light — paper | Dark — print shop |
+|---|---|---|
+| Canvas | `#FFFFFF` | `#111111` |
+| Ink | `#111111` | `#F5F5F5` |
+| Accent | `#E30613` | `#FF2A1F` |
+
+- **Flat & ruled** — radius pressed to 0–2px, hairline borders replace shadows
+- **Brand replaced** — DeepSeek whale & wordmark become the Swiss grid mark
+  and a *Swiss Typographic* wordmark
+- **Typography** — Helvetica Neue → Inter → full CJK fallback chain
+- **Restrained motion** — one 160 ms message fade (honors `prefers-reduced-motion`)
+- **Visible focus** — an unmistakable red keyboard focus ring
+- **Light + dark** — follows the shell's theme automatically
+
+## 📷 Screenshots
+
+<div align="center">
+
+**Light — paper**
+
+<img src="docs/screenshots/light.png" alt="Light mode" width="100%" />
+
+**Dark — print shop**
+
+<img src="docs/screenshots/dark.png" alt="Dark mode" width="100%" />
+
+</div>
+
+## 📦 Install
+
+Requires [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) ≥ 0.2.2-rc.1.
 
 ```sh
 git clone https://github.com/0xmrxp/dsh-reskin-swiss.git
@@ -29,69 +70,66 @@ cd dsh-reskin-swiss
 dsh plugin --profile web add .
 ```
 
-Or into a pure-stock profile:
+Restart the Web UI (or reload the page). Uninstall any time:
 
 ```sh
-dsh rescue --from-default-profile web   # fresh profile with only official bundles
-cd dsh-reskin-swiss
-dsh plugin --profile rescue add .
-dsh --profile rescue --port 3081 --no-open
+dsh plugin --profile web remove dsh-reskin-swiss
 ```
 
-Reload the Web UI. Uninstall with `dsh plugin --profile <name> remove dsh-reskin-swiss`.
+## ⚙️ Settings
 
-## What it includes (layered)
+Two toggles, live — no reload needed:
 
-**Layer 1 — token reskin.** Full remap of the official `--dsw-alias-*` semantic
-tokens (light + dark), radius ladder pressed flat, Helvetica-first type chain.
+| Setting | Default | Effect |
+|---|---|---|
+| `messageFade` | `true` | 160 ms message enter animation |
+| `focusRing` | `true` | red keyboard focus ring |
 
-**Layer 2 — attribute stamping & restrained motion.** Two attribute-filtered
-MutationObservers mirror official shell state onto the plugin's own
-`data-reskin-swiss-theme` (light/dark) and `data-reskin-swiss-sidebar`
-(open/collapsed) attributes — read-only against official attributes, no DOM
-rewriting. Plus one orchestrated moment (160 ms message fade, honors
-`prefers-reduced-motion`) and an unmistakable `focus-visible` red ring.
-
-**Layer 3 — configuration.** The host face declares a `Config` schema (two
-volatile booleans: `messageFade`, `focusRing`) so the settings live in the
-profile's config, persist across restarts, and hot-reload via Cordis. The host
-persists the current values and serves them at `GET /dsh-reskin-swiss/config`;
-the browser half polls that endpoint (visible tabs only, 4 s interval) and
-flips the `data-reskin-swiss-fade` / `data-reskin-swiss-focus` attributes —
-the stylesheet keys off them, so changes apply without a reload. Settings can
-be changed through the profile patch row's `config:` block:
+Change them through your profile's patch file:
 
 ```yaml
 - insert:
     - id: ui-reskin-swiss
       name: 'dsh-reskin-swiss'
       config:
-        messageFade: true   # message enter animation
-        focusRing: true     # red keyboard focus ring
+        messageFade: true
+        focusRing: true
 ```
 
-## How it works
+Values persist across restarts and hot-reload.
 
-```
-package.json       # dsh.client: { platform: "web" } + exports["./client"]
-cordis.patch.yml   # - insert: [id: ui-reskin-swiss, name: dsh-reskin-swiss]
-lib/client.js      # window.__ModuleLoader__.load({ id, factory }) → injects <style>
-```
+## 🧩 How it works
 
-The stylesheet scopes light values under `html[data-reskin-swiss] body`
-(attribute stamped by the plugin at boot, 0-1-1 specificity, beating the
-official `body` definitions at 0-0-1 regardless of load order) and dark
-values under `html[data-reskin-swiss] body[data-ds-dark-theme]`.
+One client stylesheet remaps the design tokens the built-in frontend already
+publishes (`--dsw-alias-*`); brand marks are repainted on the same footprint;
+two tiny observers mirror light/dark and sidebar state; the host half serves
+the current settings over a local HTTP endpoint. Original nodes are never
+removed and nothing touches React — uninstalling restores the stock look
+exactly.
 
-Cleanup is automatic: the `<style>` element and the scope attribute are
-removed when the plugin unloads (Cordis effect lifetime).
+<details>
+<summary>More detail</summary>
 
-## Sibling project
+- Light values scope under `html[data-reskin-swiss] body` (0-1-1 — beats the
+  official `body` definitions at 0-0-1 regardless of load order); dark values
+  under `html[data-reskin-swiss] body[data-ds-dark-theme]`
+- Light/dark and sidebar state are mirrored onto `data-reskin-swiss-*`
+  attributes by two attribute-filtered `MutationObserver`s (read-only against
+  official attributes)
+- Settings persist in `$DSH_HOME/dsh-reskin-swiss/config.json`, served at
+  `GET /dsh-reskin-swiss/config`, polled by visible tabs every 4 s
+- Design philosophy: see [`assets/DESIGN-PHILOSOPHY.md`](./assets/DESIGN-PHILOSOPHY.md)
 
-- [dsh-skin-swiss-typographic](https://github.com/0xmrxp/dsh-skin-swiss-typographic) —
-  the same design as a skin-center v2 skin (pure asset directory, for users of
-  the community skin-center).
+</details>
 
-## License
+## 🔗 Related
+
+- [**dsh-skin-swiss-typographic**](https://github.com/0xmrxp/dsh-skin-swiss-typographic) —
+  the same design packaged as a skin-center v2 skin (asset directory, for users
+  of the community skin center with theme picker UI)
+
+<div align="center">
 
 [MIT](./LICENSE) © 0xmrxp
+
+</div>
