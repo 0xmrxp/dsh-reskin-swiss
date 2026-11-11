@@ -45,6 +45,9 @@ the design tokens the built-in frontend already publishes.
 - **Restrained motion** — one 160 ms message fade (honors `prefers-reduced-motion`)
 - **Visible focus** — an unmistakable red keyboard focus ring
 - **Light + dark** — follows the shell's theme automatically
+- **Swiss motion system** — a 160 ms theme flip, 100 ms button press, composer
+  hairline that darkens while you type, sidebar active-bar slide-in; every
+  transition under 200 ms and the whole set collapses under prefers-reduced-motion
 
 ## 📷 Screenshots
 
@@ -96,7 +99,12 @@ Change them through your profile's patch file:
         focusRing: true
 ```
 
-Values persist across restarts and hot-reload.
+Values persist across restarts and hot-reload. A settings card with the same
+toggles also renders on the plugin's page under **Plugins** in the Web UI:
+
+<div align="center">
+<img src="docs/screenshots/settings.png" alt="Settings card on the Plugins page" width="80%" />
+</div>
 
 ## 🧩 How it works
 
