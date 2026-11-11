@@ -40,6 +40,18 @@ dsh --profile rescue --port 3081 --no-open
 
 Reload the Web UI. Uninstall with `dsh plugin --profile <name> remove dsh-reskin-swiss`.
 
+## What it includes (layered)
+
+**Layer 1 — token reskin.** Full remap of the official `--dsw-alias-*` semantic
+tokens (light + dark), radius ladder pressed flat, Helvetica-first type chain.
+
+**Layer 2 — attribute stamping & restrained motion.** Two attribute-filtered
+MutationObservers mirror official shell state onto the plugin's own
+`data-reskin-swiss-theme` (light/dark) and `data-reskin-swiss-sidebar`
+(open/collapsed) attributes — read-only against official attributes, no DOM
+rewriting. Plus one orchestrated moment (160 ms message fade, honors
+`prefers-reduced-motion`) and an unmistakable `focus-visible` red ring.
+
 ## How it works
 
 ```
